@@ -19,7 +19,7 @@ if ! command -v sdkmanager &>/dev/null; then
   exit 1
 fi
 
-echo "==> [postCreate] Android SDK root: ${ANDROID_SDK_ROOT}"
+echo "==> [postCreate] Android SDK root: ${ANDROID_SDK_ROOT:-(not set)}"
 echo "==> [postCreate] sdkmanager: $(command -v sdkmanager)"
 
 # ── Accept all licences (non-interactive) ─────────────────────────────────────

@@ -134,6 +134,7 @@ cat release.jks.b64   # copy this value
 Add to your `~/.bashrc` or run manually each session:
 
 ```bash
+mkdir -p ~/.android/keystores
 echo "${KEYSTORE_B64}" | base64 -d > ~/.android/keystores/release.jks
 ```
 
