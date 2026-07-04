@@ -1,0 +1,77 @@
+{
+  // ── Identity ──────────────────────────────────────────────────────────────
+  "name": "onnx-mobile Android",
+
+  // ── Container build ───────────────────────────────────────────────────────
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+
+  // Run as the non-root vscode user defined in the Dockerfile
+  "remoteUser": "vscode",
+
+  // ── Environment variables ─────────────────────────────────────────────────
+  "remoteEnv": {
+    "ANDROID_SDK_ROOT": "/opt/android-sdk",
+    "ANDROID_HOME": "/opt/android-sdk"
+  },
+
+  // ── VS Code extensions ────────────────────────────────────────────────────
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // Java language support
+        "vscjava.vscode-java-pack",
+        "redhat.java",
+        // Gradle build system
+        "vscjava.vscode-gradle",
+        // Kotlin
+        "fwcd.kotlin",
+        // Android (XML, Gradle)
+        "VisualStudioExptTeam.vscodeintellicode",
+        // EditorConfig
+        "EditorConfig.EditorConfig",
+        // Shell scripting
+        "foxundermoon.shell-format"
+      ],
+      "settings": {
+        "java.home": "/usr/lib/jvm/java-17-openjdk-amd64",
+        "java.configuration.runtimes": [
+          {
+            "name": "JavaSE-17",
+            "path": "/usr/lib/jvm/java-17-openjdk-amd64",
+            "default": true
+          }
+        ],
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+
+  // ── Lifecycle hooks ───────────────────────────────────────────────────────
+  // postCreateCommand runs once after the container is created.
+  "postCreateCommand": "bash .devcontainer/postCreate.sh",
+
+  // ── Machine size recommendation ───────────────────────────────────────────
+  // Android Gradle builds are memory-hungry. Request at least 8-core/16 GB.
+  // Set in repository settings: Settings → Codespaces → "Set up prebuild"
+  // or let contributors choose ≥ 8-core in the machine picker.
+  "hostRequirements": {
+    "cpus": 8,
+    "memory": "16gb",
+    "storage": "32gb"
+  },
+
+  // ── Forwarded ports ───────────────────────────────────────────────────────
+  // Uncomment to expose your app/backend port when running locally.
+  // "forwardPorts": [8080],
+
+  // ── Mounts ────────────────────────────────────────────────────────────────
+  // Persist Gradle caches across Codespace rebuilds for faster incremental builds.
+  // Note: this volume name is intentionally scoped to this project (pompomon-onnx-mobile)
+  // to avoid collisions if other projects share the same Codespaces host.
+  "mounts": [
+    "source=pompomon-onnx-mobile-gradle-cache,target=/home/vscode/.gradle,type=volume"
+  ]
+}

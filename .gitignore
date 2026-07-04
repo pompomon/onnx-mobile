@@ -32,3 +32,13 @@ google-services.json
 
 # Android Profiling
 *.hprof
+
+# Codespaces / local signing artifacts
+# (keystores decoded from secrets during a Codespace session)
+*.b64
+
+# Gradle build scan reports (generated locally)
+.gradle/build-scan-data/
+
+# User-local Gradle properties override (never commit signing credentials)
+gradle-local.properties
