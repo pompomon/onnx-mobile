@@ -27,11 +27,12 @@ chmod +x ./gradlew
 
 echo "==> Building debug APK"
 echo "    Repo root : ${REPO_ROOT}"
-echo "    Gradle    : $(./gradlew --version | grep -i 'Gradle ' | head -1)"
+echo "    Gradle    : $(./gradlew --version | grep -i 'Gradle ' | head -1 || true)"
 echo ""
 
 ./gradlew assembleDebug "$@"
 
 echo ""
 echo "==> Debug APK build complete."
-echo "    Output: $(find ./app/build/outputs/apk/debug -name '*.apk' 2>/dev/null | head -5 || echo '(no APK found — check build output above)')"
+APK_OUTPUT="$(find ./app/build/outputs/apk/debug -name '*.apk' 2>/dev/null | head -5)"
+echo "    Output: ${APK_OUTPUT:-(no APK found — check build output above)}"

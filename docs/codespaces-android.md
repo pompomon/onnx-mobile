@@ -192,7 +192,7 @@ org.gradle.jvmargs=-Xmx4g -Dfile.encoding=UTF-8
 org.gradle.configureondemand=true
 ```
 
-The Gradle cache volume (`onnx-mobile-gradle-cache`) defined in
+The Gradle cache volume (`pompomon-onnx-mobile-gradle-cache`) defined in
 `devcontainer.json` persists across Codespace rebuilds, so downloaded
 dependencies are reused.
 

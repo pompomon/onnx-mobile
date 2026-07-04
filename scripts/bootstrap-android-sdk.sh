@@ -45,7 +45,7 @@ sdkmanager \
 
 echo ""
 echo "==> Installed packages:"
-sdkmanager --list_installed 2>/dev/null || sdkmanager --list | grep -A1 "Installed"
+sdkmanager --list_installed 2>/dev/null || sdkmanager --list | grep -A1 "Installed" || true
 
 echo ""
 echo "==> Bootstrap complete."

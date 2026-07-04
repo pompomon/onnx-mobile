@@ -41,9 +41,12 @@ jobs:
             ${{ runner.os }}-gradle-
 
       - name: Make Gradle wrapper executable
-        run: chmod +x ./gradlew
-        # Only runs if gradlew exists; fail gracefully with a clear message otherwise
-        continue-on-error: false
+        run: |
+          if [[ ! -f "./gradlew" ]]; then
+            echo "::error::Gradle wrapper (./gradlew) not found. Generate and commit it with: gradle wrapper --gradle-version <version>"
+            exit 1
+          fi
+          chmod +x ./gradlew
 
       # Run Android lint (fast, no emulator needed)
       - name: Run lint
