@@ -28,7 +28,7 @@
         "vscjava.vscode-gradle",
         // Kotlin
         "fwcd.kotlin",
-        // Android (XML, Gradle)
+        // AI-assisted IntelliSense (IntelliCode)
         "VisualStudioExptTeam.vscodeintellicode",
         // EditorConfig
         "EditorConfig.EditorConfig",

@@ -22,6 +22,11 @@ make check        # lint + unit tests
 make clean        # remove build outputs
 ```
 
+> **Prerequisite:** these commands require the Android Gradle project and a
+> committed Gradle wrapper (`./gradlew` + `gradle/wrapper/*`). Until the wrapper
+> is added to the repository, `make apk-debug` / `apk-release` / `check` will
+> fail with a missing-`gradlew` error.
+
 ### Documentation
 
 See **[docs/codespaces-android.md](docs/codespaces-android.md)** for:

@@ -35,7 +35,12 @@ sdkmanager \
   "cmdline-tools;latest"
 
 # ── Gradle wrapper check ─────────────────────────────────────────────────────
-WORKSPACE="${CODESPACE_VSCODE_FOLDER:-/workspace}"
+# Derive the repository root deterministically from this script's location
+# (.devcontainer/postCreate.sh → repo root is one level up), falling back to the
+# current working directory if that can't be resolved. Avoids hard-coding a path
+# like /workspace that differs between local devcontainers and Codespaces.
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+WORKSPACE="$(cd "${SCRIPT_DIR}/.." 2>/dev/null && pwd || pwd)"
 cd "${WORKSPACE}"
 
 if [[ -f "./gradlew" ]]; then
