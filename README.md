@@ -25,7 +25,8 @@ make clean        # remove build outputs
 > **Prerequisite:** these commands require the Android Gradle project and a
 > committed Gradle wrapper (`./gradlew` + `gradle/wrapper/*`). Until the wrapper
 > is added to the repository, `make apk-debug` / `apk-release` / `check` will
-> fail with a missing-`gradlew` error.
+> fail with a missing-`gradlew` error. Generate it once with
+> `gradle wrapper --gradle-version <version>` and commit the result.
 
 ### Documentation
 
