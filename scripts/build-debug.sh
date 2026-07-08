@@ -34,5 +34,5 @@ echo ""
 
 echo ""
 echo "==> Debug APK build complete."
-APK_OUTPUT="$(find ./app/build/outputs/apk/debug -name '*.apk' 2>/dev/null | head -1)"
+APK_OUTPUT="$(find ./app/build/outputs/apk/debug -name '*.apk' -print -quit 2>/dev/null)"
 echo "    Output: ${APK_OUTPUT:-(no APK found — check build output above)}"
