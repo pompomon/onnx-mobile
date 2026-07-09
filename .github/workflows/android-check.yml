@@ -24,16 +24,23 @@ jobs:
         uses: actions/checkout@v4
 
       # The Android Gradle project + wrapper may not be committed yet. Detect the
-      # wrapper up front so the lint steps below can be skipped gracefully instead
-      # of failing every push/PR until the wrapper is added.
+      # complete wrapper up front so the lint steps below can be skipped gracefully
+      # instead of failing every push/PR until the wrapper is added.
       - name: Check for Gradle wrapper
         id: gradlew
         run: |
-          if [[ -f "./gradlew" ]]; then
+          missing=()
+          for file in ./gradlew ./gradle/wrapper/gradle-wrapper.properties ./gradle/wrapper/gradle-wrapper.jar; do
+            if [[ ! -f "$file" ]]; then
+              missing+=("$file")
+            fi
+          done
+
+          if [[ "${#missing[@]}" -eq 0 ]]; then
             echo "present=true" >> "$GITHUB_OUTPUT"
           else
             echo "present=false" >> "$GITHUB_OUTPUT"
-            echo "::notice::Gradle wrapper (./gradlew) not found — skipping lint until the Android Gradle project and wrapper are committed. Generate it with: gradle wrapper --gradle-version <version>"
+            echo "::notice::Complete Gradle wrapper not found (missing: ${missing[*]}) — skipping lint until the Android Gradle project and wrapper are committed. Generate it with: gradle wrapper --gradle-version <version>"
           fi
 
       - name: Set up JDK 17

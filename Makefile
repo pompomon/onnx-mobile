@@ -3,7 +3,7 @@
 # Convenience targets that wrap the Gradle build system.
 # Primary build environment: GitHub Codespaces (see docs/codespaces-android.md)
 #
-# Prerequisites: Gradle wrapper (./gradlew) must exist in the repo root.
+# Prerequisites: complete Gradle wrapper must exist in the repo root.
 #
 # Usage:
 #   make apk-debug      – build a debug APK
@@ -18,8 +18,9 @@
 GRADLEW := ./gradlew
 
 define require-gradlew
-	@if [ ! -f "$(GRADLEW)" ]; then \
-	  echo "ERROR: Gradle wrapper ($(GRADLEW)) not found."; \
+	@if [ ! -f "$(GRADLEW)" ] || [ ! -f "gradle/wrapper/gradle-wrapper.properties" ] || [ ! -f "gradle/wrapper/gradle-wrapper.jar" ]; then \
+	  echo "ERROR: Complete Gradle wrapper not found."; \
+	  echo "       Required: $(GRADLEW), gradle/wrapper/gradle-wrapper.properties, gradle/wrapper/gradle-wrapper.jar"; \
 	  echo "       Generate it with: gradle wrapper --gradle-version <version>"; \
 	  exit 1; \
 	fi

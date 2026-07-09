@@ -135,7 +135,7 @@ Add to your `~/.bashrc` or run manually each session:
 
 ```bash
 mkdir -p ~/.android/keystores
-echo "${KEYSTORE_B64}" | base64 -d > ~/.android/keystores/release.jks
+printf '%s' "${KEYSTORE_B64}" | base64 -d > ~/.android/keystores/release.jks
 ```
 
 Then set signing env vars:

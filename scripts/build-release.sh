@@ -22,8 +22,11 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "${REPO_ROOT}"
 
 # ── Validate Gradle wrapper ────────────────────────────────────────────────────
-if [[ ! -f "./gradlew" ]]; then
-  echo "ERROR: Gradle wrapper (./gradlew) not found in ${REPO_ROOT}." >&2
+if [[ ! -f "./gradlew" ]] || \
+   [[ ! -f "./gradle/wrapper/gradle-wrapper.properties" ]] || \
+   [[ ! -f "./gradle/wrapper/gradle-wrapper.jar" ]]; then
+  echo "ERROR: Complete Gradle wrapper not found in ${REPO_ROOT}." >&2
+  echo "       Required: ./gradlew, ./gradle/wrapper/gradle-wrapper.properties, ./gradle/wrapper/gradle-wrapper.jar" >&2
   echo "       Generate it with: gradle wrapper --gradle-version <version>" >&2
   exit 1
 fi
